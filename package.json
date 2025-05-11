@@ -2,7 +2,16 @@
   "name": "my-framework",
   "version": "1.0.0",
   "description": "Framework modular con servicios como submódulos Git",
+  "volta": {
+    "node": "20.11.1",
+    "npm": "10.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
+    "preinstall": "node scripts/check-node-version.js",
+    "check:node": "node scripts/check-node-version.js",
     "start": "node scripts/start-services.js",
     "services:install": "node scripts/install-services.js",
     "services:build": "node scripts/build-services.js",

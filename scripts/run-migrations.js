@@ -148,7 +148,7 @@ async function runMigrations() {
     console.log(`\n${colors.yellow}Verificando si la base de datos está en ejecución...${colors.reset}`);
     
     try {
-      execSync('docker ps | grep framework-postgres', { stdio: 'pipe' });
+      execSync('docker ps | grep framework-mariadb', { stdio: 'pipe' });
       console.log(`${colors.green}✓ Base de datos en ejecución.${colors.reset}`);
     } catch (error) {
       console.log(`${colors.yellow}La base de datos no parece estar en ejecución. Intentando iniciarla...${colors.reset}`);
