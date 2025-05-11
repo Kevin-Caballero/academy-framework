@@ -1,0 +1,3 @@
+[submodule "services/backend"]
+	path = services/backend
+	url = https://github.com/Kevin-Caballero/academy-backend.git

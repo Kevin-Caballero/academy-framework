@@ -47,6 +47,5 @@ temp/
 backups/*
 !backups/.gitkeep
 
-# Archivos de submódulos
-services/*
-!services/.gitkeep 
+# Placeholder para mantener la carpeta services
+!services/ 
