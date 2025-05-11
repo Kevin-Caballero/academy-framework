@@ -1,0 +1,52 @@
+# Dependencias
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Variables de entorno
+.env
+
+# Archivos de construcción
+dist/
+build/
+out/
+
+# Archivos de caché
+.cache/
+.parcel-cache/
+
+# Archivos de registro
+logs/
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Directorios de IDE/editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos temporales
+tmp/
+temp/
+
+# Contenido de submódulos (mantener carpetas)
+/services/*/node_modules/
+/services/*/dist/
+/services/*/build/
+/services/*/public/build/
+/services/*/tmp/
+/services/*/temp/
+/services/*/.env
+
+# Base de datos
+backups/*
+!backups/.gitkeep
+
+# Archivos de submódulos
+services/*
+!services/.gitkeep 

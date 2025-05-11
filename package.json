@@ -1,0 +1,30 @@
+{
+  "name": "my-framework",
+  "version": "1.0.0",
+  "description": "Framework modular con servicios como submódulos Git",
+  "scripts": {
+    "start": "node scripts/start-services.js",
+    "services:install": "node scripts/install-services.js",
+    "services:build": "node scripts/build-services.js",
+    "db:up": "docker-compose -f database/docker-compose.yml up -d && sleep 5 && node scripts/run-migrations.js --auto",
+    "db:down": "docker-compose -f database/docker-compose.yml down",
+    "db:logs": "docker-compose -f database/docker-compose.yml logs -f",
+    "db:reset": "docker-compose -f database/docker-compose.yml down -v && docker-compose -f database/docker-compose.yml up -d && sleep 5 && node scripts/run-migrations.js --auto",
+    "db:backup": "node scripts/backup-db.js",
+    "db:restore": "node scripts/restore-db.js",
+    "db:migrate": "node scripts/run-migrations.js",
+    "init": "node scripts/init-framework.js"
+  },
+  "keywords": ["framework", "modular", "services"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.1",
+    "dotenv": "^16.3.1",
+    "inquirer": "^9.2.7",
+    "chalk": "^5.3.0",
+    "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+  }
+} 
