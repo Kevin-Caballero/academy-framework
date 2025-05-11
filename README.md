@@ -20,6 +20,7 @@ my-framework/
 │   ├── install-services.js # Script para instalar dependencias de servicios
 │   ├── build-services.js  # Script para construir servicios
 │   ├── run-migrations.js  # Script para ejecutar migraciones de base de datos
+│   ├── pull-services.js   # Script para clonar/actualizar servicios
 │   ├── backup-db.js       # Script para hacer backup de la base de datos
 │   └── restore-db.js      # Script para restaurar la base de datos
 ├── backups/               # Directorio para backups de la base de datos
@@ -50,7 +51,15 @@ npm install
 npm run init
 ```
 
-4. Instalar dependencias de todos los servicios:
+4. Obtener los servicios (submódulos):
+
+```bash
+npm run pull
+```
+
+Este comando detectará los servicios configurados en el package.json o los submódulos existentes y ofrecerá opciones para clonarlos o actualizarlos.
+
+5. Instalar dependencias de todos los servicios:
 
 ```bash
 npm run services:install
@@ -142,6 +151,23 @@ Este comando proporciona una interfaz interactiva para:
 2. Permitirte seleccionar qué servicio usar para las migraciones
 3. Elegir qué script de migración ejecutar si hay varios disponibles
 
+### Obtener o Actualizar Servicios
+
+Para clonar o actualizar los servicios (submódulos) definidos en el package.json:
+
+```bash
+npm run pull
+```
+
+Este comando:
+1. Detecta servicios configurados en el package.json o submódulos existentes
+2. Permite seleccionar qué servicios clonar o actualizar
+3. Clona nuevos servicios o actualiza los existentes
+4. Ofrece la opción de añadir los servicios como submódulos Git
+5. Gestiona cambios locales en repositorios existentes
+
+Si un servicio ya existe como repositorio Git, se actualizará; si no existe, se clonará.
+
 ## Añadir un nuevo servicio
 
 Para añadir un nuevo servicio al framework:
@@ -151,6 +177,20 @@ npm run add-service
 ```
 
 Este comando interactivo le guiará a través del proceso de agregar un nuevo servicio, ya sea como un submódulo Git existente o creando uno nuevo.
+
+También puedes añadir la información del servicio directamente en el `package.json` en la sección `services`:
+
+```json
+"services": {
+  "mi-servicio": {
+    "repository": "https://github.com/mi-usuario/mi-servicio.git",
+    "branch": "main",
+    "description": "Descripción del servicio"
+  }
+}
+```
+
+Y luego ejecutar `npm run pull` para clonarlo.
 
 ## Gestión de Submódulos
 
@@ -171,4 +211,69 @@ git submodule add https://github.com/tu-usuario/nuevo-servicio.git services/nuev
 - **Backend API**: Servicios y lógica de negocio (en `services/backend`)
 - **Admin Panel**: Panel de administración (en `services/admin`)
 - **Client**: Aplicación pública para clientes (en `services/client`)
-- **Database**: Servicios de base de datos con Docker (en `database/`) 
+- **Database**: Servicios de base de datos con Docker (en `database/`)
+
+# Academy Backend
+
+Este es el servicio de backend para el framework Academy, desarrollado como un submódulo independiente.
+
+## Tecnologías utilizadas
+
+- NestJS
+- TypeScript
+- PostgreSQL
+- Docker
+
+## Estructura del proyecto
+
+```
+backend/
+├── src/                # Código fuente
+│   ├── main.ts         # Punto de entrada de la aplicación
+│   ├── app.module.ts   # Módulo principal
+│   ├── controllers/    # Controladores
+│   ├── services/       # Servicios
+│   ├── entities/       # Entidades
+│   └── migrations/     # Migraciones de base de datos
+├── test/               # Tests
+├── docker/             # Configuración Docker
+├── scripts/            # Scripts de utilidad
+└── environment/        # Configuración de entorno
+```
+
+## Instalación
+
+```bash
+# Instalar dependencias
+npm install
+```
+
+## Ejecución
+
+```bash
+# Desarrollo
+npm run start:dev
+
+# Producción
+npm run start:prod
+```
+
+## Migraciones
+
+```bash
+# Crear migración
+npm run migration:create
+
+# Ejecutar migraciones
+npm run migration:run
+```
+
+## Docker
+
+```bash
+# Construir imagen
+docker build -t academy-backend .
+
+# Ejecutar contenedor
+docker run -p 3000:3000 academy-backend
+``` 

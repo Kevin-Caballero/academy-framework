@@ -6,6 +6,7 @@
     "start": "node scripts/start-services.js",
     "services:install": "node scripts/install-services.js",
     "services:build": "node scripts/build-services.js",
+    "pull": "node scripts/pull-services.js",
     "db:up": "docker-compose -f database/docker-compose.yml up -d && sleep 5 && node scripts/run-migrations.js --auto",
     "db:down": "docker-compose -f database/docker-compose.yml down",
     "db:logs": "docker-compose -f database/docker-compose.yml logs -f",
@@ -26,5 +27,22 @@
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
+  },
+  "services": {
+    "backend": {
+      "repository": "https://github.com/Kevin-Caballero/academy-backend.git",
+      "branch": "main",
+      "description": "Backend API con NestJS y TypeScript"
+    },
+    "admin": {
+      "repository": "https://github.com/Kevin-Caballero/academy-admin.git",
+      "branch": "main",
+      "description": "Panel de administración"
+    },
+    "client": {
+      "repository": "https://github.com/Kevin-Caballero/academy-client.git",
+      "branch": "main",
+      "description": "Cliente público"
+    }
   }
 } 
